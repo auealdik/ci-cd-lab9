@@ -1,0 +1,25 @@
+name: Docker CI with Trivy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t my-web-app .
+
+      - name: Trivy security scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: my-web-app
+          severity: HIGH,CRITICAL
+
+      - name: Done
+        run: echo "Docker build and security scan completed"
