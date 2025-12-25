@@ -2,7 +2,7 @@ name: Docker CI with Trivy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   docker:
